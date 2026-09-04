@@ -1,1 +1,265 @@
-Hello
+<!DOCTYPE html>
+<!-- The following comment is called a MOTW comment and is necessary for the TiddlyIE Internet Explorer extension --><!-- saved from url=(0021)https://tiddlywiki.com --><html lang="en-GB">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!--~~ Raw markup for the top of the head section ~~-->
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="application-name" content="TiddlyWiki">
+<meta name="generator" content="TiddlyWiki">
+<meta name="tiddlywiki-version" content="5.5.0-prerelease">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="copyright" content="TiddlyWiki created by Jeremy Ruston, (jeremy [at] jermolene [dot] com)
+
+Copyright (c) 2004-2007, Jeremy Ruston
+Copyright (c) 2007-2025, UnaMesa Association
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
+<title>In-Place Upgrader — Plugin demo</title>
+<!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
+
+<!--~~ Raw markup ~~-->
+
+
+
+</head>
+<body class="tc-body">
+<!--~~ Raw markup for the top of the body section ~~-->
+
+<!--~~ Static styles ~~-->
+<div id="styleArea">
+<style data-tiddler-title="$:/boot/boot.css" data-tiddler-type="text/css" type="text/css">/*
+Basic styles used before we boot up the parsing engine
+*/
+
+/*
+Error message and password prompt
+*/
+
+.tc-error-form {
+	font-family: sans-serif;
+	color: #fff;
+	z-index: 20000;
+	position: fixed;
+	background-color: rgb(255, 75, 75);
+	border: 8px solid rgb(255, 0, 0);
+	border-radius: 8px;
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 4em;
+	padding: 0 2em 1em 2em;
+}
+
+.tc-error-form h1 {
+	text-align: center;
+}
+
+.tc-error-prompt {
+	text-align: center;
+	color: #000;
+}
+
+.tc-error-message {
+	overflow: auto;
+	max-height: 40em;
+	padding-right: 1em;
+	margin: 1em 0;
+	white-space: pre-line;
+}
+
+.tc-password-wrapper {
+    font-family: sans-serif;
+	z-index: 20000;
+	position: fixed;
+	text-align: center;
+	width: 200px;
+	top: 4em;
+	left: 50%;
+	margin-left: -144px; /* - width/2 - paddingHorz/2 - border */
+	padding: 16px 16px 16px 16px;
+	border-radius: 8px;
+}
+
+.tc-password-wrapper {
+	color: #000;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: rgb(197, 235, 183);
+	border: 8px solid rgb(164, 197, 152);
+}
+
+.tc-password-wrapper form {
+	text-align: left;
+}
+
+.tc-password-wrapper h1 {
+	font-size: 16px;
+	line-height: 20px;
+	padding-bottom: 16px;
+}
+
+.tc-password-wrapper input {
+	width: 100%;
+}
+</style>
+</div>
+<!--~~ Static content for Google and browsers without JavaScript ~~-->
+<noscript>
+<div id="splashArea">
+
+
+<p>This <a class="tc-tiddlylink-external" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">TiddlyWiki</a> contains the following tiddlers:</p>
+<p></p>
+<ul>
+
+<li>$:/config/AutoSave</li>
+
+<li>$:/config/coreURL</li>
+
+<li>$:/config/ExternalJS/EnableExternalPlugins</li>
+
+<li>$:/config/ExternalJS/Prefix/Core</li>
+
+<li>$:/config/ExternalJS/Prefix/Plugins</li>
+
+<li>$:/config/inplace-upgrade/auto-backup</li>
+
+<li>$:/config/inplace-upgrade/core-url</li>
+
+<li>$:/config/inplace-upgrade/filter</li>
+
+<li>$:/config/inplace-upgrade/target-url</li>
+
+<li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home</li>
+
+<li>$:/config/SaveWikiButton/Template</li>
+
+<li>$:/core/ui/Buttons/refresh</li>
+
+<li>$:/DefaultTiddlers</li>
+
+<li>$:/Import</li>
+
+<li>$:/isEncrypted</li>
+
+<li>$:/plugins/theophile.dev/inplace-upgrade/latest-version</li>
+
+<li>$:/plugins/theophile.dev/inplace-upgrade/library</li>
+
+<li>$:/SiteDomain</li>
+
+<li>$:/SitePreviewUrl</li>
+
+<li>$:/SiteSubtitle</li>
+
+<li>$:/SiteTitle</li>
+
+<li>$:/SiteUrl</li>
+
+<li>$:/state/http-requests</li>
+
+<li>$:/state/plugin-info--1428507752-$:/plugins/cdr/external-js---848723632</li>
+
+<li>$:/state/plugin-info-551182168-$:/plugins/theophile.dev/inplace-upgrade--720658648</li>
+
+<li>$:/state/tab--86143343</li>
+
+<li>$:/state/tab-1749438307</li>
+
+<li>$:/status/RequireReloadDueToPluginChange</li>
+
+<li>$:/status/UserName</li>
+
+<li>$:/StoryList</li>
+
+<li>$:/tags/InplaceUpgrade/Edition</li>
+
+<li>$:/theme</li>
+
+<li>$:/UploadURL</li>
+
+<li>$:/UploadWithUrlOnly</li>
+
+</ul>
+
+
+
+
+<style>
+.tc-remove-when-wiki-loaded {display: none;}
+</style>
+
+</div>
+</noscript>
+<!--~~ Ordinary tiddlers ~~-->
+<script class="tiddlywiki-tiddler-store" type="application/json">[
+{"text":"no","title":"$:/config/AutoSave"},
+{"title":"$:/config/coreURL","base-path":"https://tiddlywiki.com/prerelease/"},
+{"created":"20260904194210810","creator":"theophile.dev","text":"yes","title":"$:/config/ExternalJS/EnableExternalPlugins","modified":"20260904194210810","modifier":"theophile.dev"},
+{"created":"20260904194724275","creator":"theophile.dev","text":"https://designthinkerer.github.io/in-place-upgrader/tiddlywikicore","title":"$:/config/ExternalJS/Prefix/Core","modified":"20260904194741399","modifier":"theophile.dev"},
+{"created":"20260904194750404","creator":"theophile.dev","text":"https://designthinkerer.github.io/in-place-upgrader/myplugins","title":"$:/config/ExternalJS/Prefix/Plugins","modified":"20260904194751801","modifier":"theophile.dev"},
+{"created":"20260831134805040","text":"yes","title":"$:/config/inplace-upgrade/auto-backup","modified":"20260831134933646"},
+{"title":"$:/config/inplace-upgrade/core-url","url":"https://tiddlywiki.com/prerelease/tiddlywikicore-5.5.0-prerelease.js"},
+{"created":"20260831170431371","title":"$:/config/inplace-upgrade/filter","text":"[subfilter{$:/config/SaverFilter}]\n-[prefix[$:/core]!is[shadow]] \n-[prefix[$:/boot/]!is[shadow]]\n-[prefix[$:/themes/tiddlywiki]!is[shadow]] \n-[[$:/config/SaveWikiButton/Template]]","modified":"20260902203339271"},
+{"created":"20260831131459784","creator":"theophile-dev","title":"$:/config/inplace-upgrade/target-url","text":"https://tiddlywiki.com/prerelease/empty-external-core.html","modified":"20260904161640941","modifier":"theophile.dev"},
+{"created":"20260831130228214","text":"show","title":"$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home","modified":"20260831130228214"},
+{"title":"$:/config/SaveWikiButton/Template","text":"$:/core/save/offline-external-js"},
+{"created":"20260903160547144","creator":"theophile.dev","text":"\\whitespace trim\n\u003C$button message=\"tm-browser-refresh\" tooltip={{$:/language/Buttons/Refresh/Hint}} aria-label={{$:/language/Buttons/Refresh/Caption}} class=\u003C\u003Ctv-config-toolbar-class>>>\n\u003C%if [\u003Ctv-config-toolbar-icons>match[yes]] %>\n{{$:/core/images/refresh-button}}\n\u003C%endif%>\n\u003C%if [\u003Ctv-config-toolbar-text>match[yes]] %>\n\u003Cspan class=\"tc-btn-text\">\n\u003C$text text={{$:/language/Buttons/Refresh/Caption}}/>\n\u003C/span>\n\u003C%endif%>\n\u003C/$button>\n","title":"$:/core/ui/Buttons/refresh","tags":"$:/tags/PageControls","caption":"{{$:/core/images/refresh-button}} {{$:/language/Buttons/Refresh/Caption}}","description":"{{$:/language/Buttons/Refresh/Hint}}","modified":"20260903160547144","modifier":"theophile.dev"},
+{"created":"20260831130204377","title":"$:/DefaultTiddlers","text":"$:/plugins/theophile.dev/inplace-upgrade","modified":"20260901163622994"},
+{"title":"$:/Import","text":"The following tiddlers were imported:\n\n# [[$:/plugins/cdr/external-js]]","status":"complete"},
+{"title":"$:/isEncrypted","text":"no"},
+{"created":"20260904161702877","creator":"theophile.dev","text":"\\import [subfilter{$:/core/config/GlobalImportFilter}]\n\n\\procedure store-tw-versions-data()\n  \u003C$action-setfield $tiddler=\"$:/temp/store-tw-versions-data\" status=\u003C\u003Cstatus>> data=\u003C\u003Cdata>>/>\n\\end\n\n\\procedure get-tw-versions()\n  \u003C$action-sendmessage\n    $message=\"tm-http-request\"\n    url=\"https://api.github.com/repos/TiddlyWiki/tiddlywiki.com-gh-pages/contents/prerelease\"\n    bind-status=\"$:/temp/store-tw-versions-data/status\"\n    oncompletion=\u003C\u003Cstore-tw-versions-data>>\n  />\n\\end\n\n\\function is.pending()\n[{$:/temp/store-tw-versions-data/status}match[pending]]\n\\end\n\n\\function tw.versions()\n  [[$:/temp/store-tw-versions-data]get[data]jsonindexes[]] \n  :map[[$:/temp/store-tw-versions-data]get[data]jsonget\u003CcurrentTiddler>,[name]removeprefix[tiddlywikicore-]removesuffix[.js]]\n  :filter[!is[blank]]\n\\end\n\n\\function tw.latest.prerelease()\n  [tw.versions[]suffix[-prerelease]last[]]\n\\end\n\n\\function tw.latest.stable()\n  [tw.versions[]!suffix[-prerelease]last[]]\n\\end\n\n\\function target.version()\n    [\u003Ctw.latest.prerelease>compare:version:gt\u003Ctw.latest.stable>else\u003Ctw.latest.stable>]\n\\end\n\n\\define defaultBasePath()\n./\n\\end\n\n\\function base.path()\n  [[$:/config/coreURL]get[base-path]else\u003CdefaultBasePath>]\n\\end\n\n\\function coreURL()\n  [[$(base.path)$tiddlywikicore-$(target.version)$.js]substitute[]]\n\\end\n\n\u003C\u003Cget-tw-versions>>\n\n\u003C$tiddler tiddler=\"$:/temp/store-tw-versions-data\">\n\n\n\u003C$button actions=\u003C\u003Cget-tw-versions>> >{{$:/core/images/refresh-button}} Check for updates\u003C/$button> \u003C$checkbox tiddler=\u003C\u003CthisTiddler>> tag=\"$:/tags/StartupAction/PostRender\"> Check on startup\u003C/$checkbox>\n\n\n\u003C%if [is.pending[]] %>\n\u003Cp>Loading..\u003C/p>\n\u003C%elseif [\u003Ctw.versions>is[blank]] %>\n\u003C%elseif [\u003Ctarget.version>match\u003Cversion>] %>\n\u003Cp>Your TiddlyWiki is up to date (v\u003C\u003Cversion>>).\u003C/p>\n\u003C%else%>\n\u003Cp class=\"tc-message-box\">\u003Cstrong>Update available:\u003C/strong> TiddlyWiki v\u003C\u003Ctarget.version>>\u003C/p>\n\u003C%endif%>\n\n\u003C/$tiddler>","tags":"","title":"$:/plugins/theophile.dev/inplace-upgrade/latest-version","modified":"20260904161720178","modifier":"theophile.dev"},
+{"created":"20260904194128253","creator":"theophile.dev","text":"","tags":"$:/tags/PluginLibrary","url":"https://in-place-upgrader-test.tiddlyhost.com/","caption":"In-Place Upgrader Library","title":"$:/plugins/theophile.dev/inplace-upgrade/library","modified":"20260904194128253","modifier":"theophile.dev"},
+{"text":"in-place-upgrader-test.tiddlyhost.com","title":"$:/SiteDomain"},
+{"text":"https://in-place-upgrader-test.tiddlyhost.com/thumb.png","title":"$:/SitePreviewUrl"},
+{"created":"20260831180529669","title":"$:/SiteSubtitle","text":"Plugin demo","modified":"20260831180536605"},
+{"created":"20260831132546343","title":"$:/SiteTitle","text":"In-Place Upgrader","modified":"20260831175635008"},
+{"text":"https://in-place-upgrader-test.tiddlyhost.com","title":"$:/SiteUrl"},
+{"title":"$:/state/http-requests","text":"0"},
+{"created":"20260904194207826","creator":"theophile.dev","title":"$:/state/plugin-info--1428507752-$:/plugins/cdr/external-js---848723632","text":"contents","modified":"20260904194717165","modifier":"theophile.dev"},
+{"created":"20260904161655981","creator":"theophile.dev","title":"$:/state/plugin-info-551182168-$:/plugins/theophile.dev/inplace-upgrade--720658648","text":"upgrade","modified":"20260904161655981","modifier":"theophile.dev"},
+{"created":"20260904161940799","creator":"theophile.dev","title":"$:/state/tab--86143343","text":"$:/core/ui/ControlPanel/Plugins/Installed/Plugins","modified":"20260904194203835","modifier":"theophile.dev"},
+{"created":"20260904161939756","creator":"theophile.dev","title":"$:/state/tab-1749438307","text":"$:/core/ui/ControlPanel/Plugins","modified":"20260904194202710","modifier":"theophile.dev"},
+{"title":"$:/status/RequireReloadDueToPluginChange","text":"no"},
+{"created":"20260902204953037","creator":"theophile-dev","title":"$:/status/UserName","text":"theophile.dev","modified":"20260902214016510","modifier":"theophile-dev"},
+{"title":"$:/StoryList","created":"20260904194157596","creator":"theophile.dev","text":"","list":"$:/ControlPanel $:/plugins/cdr/external-js $:/config/ExternalJS/Prefix/Plugins $:/config/ExternalJS/Prefix/Core $:/plugins/theophile.dev/inplace-upgrade","modified":"20260904194745875","modifier":"theophile.dev"},
+{"created":"20260902205225049","creator":"theophile-dev","title":"$:/tags/InplaceUpgrade/Edition","list":"$:/plugins/theophile.dev/inplace-upgrade/edition/empty $:/plugins/theophile.dev/inplace-upgrade/edition/prerelease/empty $:/plugins/theophile.dev/inplace-upgrade/edition/empty-external-core $:/plugins/theophile.dev/inplace-upgrade/edition/prerelease/empty-external-core","modified":"20260902205421663","modifier":"theophile-dev"},
+{"created":"20260831173506253","title":"$:/theme","text":"$:/themes/tiddlywiki/vanilla","modified":"20260831173509576"},
+{"text":"","title":"$:/UploadURL"},
+{"text":"yes","title":"$:/UploadWithUrlOnly"}
+]</script><script class="tiddlywiki-tiddler-store" type="application/json">[{"text":"","title":"$:/UploadURL"},{"text":"yes","title":"$:/UploadWithUrlOnly"},{"text":"yes","title":"$:/status/IsLoggedIn"},{"text":"https://in-place-upgrader-test.tiddlyhost.com","title":"$:/SiteUrl"},{"text":"in-place-upgrader-test.tiddlyhost.com","title":"$:/SiteDomain"},{"text":"https://in-place-upgrader-test.tiddlyhost.com/thumb.png","title":"$:/SitePreviewUrl"}]</script><div id="storeArea" style="display:none;"></div>
+<!--~~ Raw markup for the bottom of the body section ~~-->
+
+<!--~~ Load external JavaScripts ~~-->
+<script src="https://designthinkerer.github.io/in-place-upgrader/myplugins-5.5.0-prerelease.js" onerror="alert('Error: Cannot load https://designthinkerer.github.io/in-place-upgrader/myplugins-5.5.0-prerelease.js');"></script>
+<script src="https://designthinkerer.github.io/in-place-upgrader/tiddlywikicore-5.5.0-prerelease.js" onerror="alert('Error: Cannot load https://designthinkerer.github.io/in-place-upgrader/tiddlywikicore-5.5.0-prerelease.js');"></script>
+</body>
+</html>
